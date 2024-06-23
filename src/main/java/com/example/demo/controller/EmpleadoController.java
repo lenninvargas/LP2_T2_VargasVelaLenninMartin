@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.entity.AreaEntity;
@@ -50,4 +51,35 @@ public class EmpleadoController{
 		empleadoRepository.save(empleado);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/detalle_empleado/{id}")
+	public String showDetalleEmpleado(Model model, @PathVariable("id")String id) {
+		EmpleadoEntity empleado = empleadoRepository.findById(id).get();
+		model.addAttribute("empleado", empleado);
+		return "detalle_empleado";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String eliminarEmpleado(@PathVariable("id")String id) {
+		empleadoRepository.deleteById(id);
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
