@@ -65,21 +65,26 @@ public class EmpleadoController{
 		return "redirect:/";
 	}
 	
+	@GetMapping("/editar_empleado/{id}")
+	public String showEditarEmpleado(Model model, @PathVariable("id")String id) {
+		EmpleadoEntity empleado = empleadoRepository.findById(id).get();
+		List<AreaEntity> listaArea = areaRepository.findAll();
+		model.addAttribute("listaArea", listaArea);
+		model.addAttribute("empleado", empleado);
+		return "editar_empleado";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PostMapping("/editar_empleado/{id}")
+	public String editarEmpleado(@ModelAttribute EmpleadoEntity empleado, @PathVariable("id")String id) {
+		EmpleadoEntity empleadoEncontrado = empleadoRepository.findById(id).get();
+		empleadoEncontrado.setNombreEmpleado(empleado.getNombreEmpleado());
+		empleadoEncontrado.setApellidoEmpleado(empleado.getApellidoEmpleado());
+		empleadoEncontrado.setFechaNacimiento(empleado.getFechaNacimiento());
+		empleadoEncontrado.setDireccion(empleado.getDireccion());
+		empleadoEncontrado.setCorreo(empleado.getCorreo());
+		empleadoEncontrado.setAreaId(empleado.getAreaId());
+		empleadoRepository.save(empleadoEncontrado);
+		return "redirect:/";
+	}
+
 }

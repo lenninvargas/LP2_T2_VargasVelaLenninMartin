@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -45,6 +47,7 @@ public class EmpleadoEntity {
 	private String apellidoEmpleado;
 	
 	@Column(name = "fecha_nacimiento", nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private LocalDate fechaNacimiento;
 	
