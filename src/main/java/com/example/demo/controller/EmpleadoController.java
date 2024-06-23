@@ -42,6 +42,8 @@ public class EmpleadoController{
 	public String registrarEmpleado(Model model, @ModelAttribute EmpleadoEntity empleado) {
 		if(empleadoRepository.findByDniEmpleado(empleado.getDniEmpleado()) != null) {
 			model.addAttribute("errorMessage", "¡Error! DNI en uso");
+			List<AreaEntity> listaArea = areaRepository.findAll();
+			model.addAttribute("listaArea", listaArea);
 			model.addAttribute("empleado", new EmpleadoEntity());
 			return "registrar_empleado"; 
 		}
